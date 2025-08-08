@@ -89,7 +89,8 @@ class Invader {
     ctx.save();
     ctx.strokeStyle = ENEMY_COLOR;
     ctx.lineWidth = 2;
-    ctx.fillStyle = this.spriteToggle ? "#39ff14" : "#16c60c";
+    // Checker pattern: neon green if (row + col) even, bright blue if odd
+    ctx.fillStyle = ((this.row + this.col) % 2 === 0) ? "#39ff14" : "#189bff";
     // Simple pixel invader
     ctx.beginPath();
     ctx.rect(this.x+8, this.y+6, 24, 8);
