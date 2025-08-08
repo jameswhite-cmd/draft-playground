@@ -2,6 +2,10 @@
 // All rights reserved. No external libraries used.
 // Author: Genie
 
+// =================== EMBED YANG LI FACE =================== //
+const yangImg = new Image();
+yangImg.src = 'DATA_URI'; // Replace DATA_URI with your Base64 image string
+
 // =================== CONFIG =================== //
 const CANVAS_WIDTH = 600;
 const CANVAS_HEIGHT = 800;
@@ -87,20 +91,25 @@ class Invader {
   draw(ctx) {
     if (!this.alive) return;
     ctx.save();
-    ctx.strokeStyle = ENEMY_COLOR;
-    ctx.lineWidth = 2;
-    // Checker pattern: neon green if (row + col) even, bright blue if odd
-    ctx.fillStyle = ((this.row + this.col) % 2 === 0) ? "#39ff14" : "#189bff";
-    // Simple pixel invader
-    ctx.beginPath();
-    ctx.rect(this.x+8, this.y+6, 24, 8);
-    ctx.rect(this.x+12, this.y+2, 16, 6);
-    ctx.rect(this.x+4, this.y+14, 32, 8);
-    ctx.rect(this.x, this.y+22, 8, 4);
-    ctx.rect(this.x+32, this.y+22, 8, 4);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
+    if ((this.row + this.col) % 2 === 1) {
+      // Draw Yang Li's face image for blue-checker aliens
+      ctx.drawImage(yangImg, this.x, this.y, this.width, this.height);
+    } else {
+      // Draw green pixel-art invader for (row+col)%2===0
+      ctx.strokeStyle = ENEMY_COLOR;
+      ctx.lineWidth = 2;
+      ctx.fillStyle = "#39ff14";
+      // Simple pixel invader
+      ctx.beginPath();
+      ctx.rect(this.x+8, this.y+6, 24, 8);
+      ctx.rect(this.x+12, this.y+2, 16, 6);
+      ctx.rect(this.x+4, this.y+14, 32, 8);
+      ctx.rect(this.x, this.y+22, 8, 4);
+      ctx.rect(this.x+32, this.y+22, 8, 4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
     ctx.restore();
   }
 }
@@ -427,19 +436,21 @@ class Game {
 
 // =================== BOOTSTRAP GAME =================== //
 window.onload = () => {
-  const canvas = document.getElementById("gameCanvas");
-  const ctx = canvas.getContext("2d");
-  canvas.width = CANVAS_WIDTH;
-  canvas.height = CANVAS_HEIGHT;
-  let game = new Game(ctx);
+  yangImg.onload = () => {
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = CANVAS_WIDTH;
+    canvas.height = CANVAS_HEIGHT;
+    let game = new Game(ctx);
 
-  function loop() {
-    if (game.state === "playing") {
-      game.update();
+    function loop() {
+      if (game.state === "playing") {
+        game.update();
+      }
+      game.draw();
+      requestAnimationFrame(loop);
     }
-    game.draw();
-    requestAnimationFrame(loop);
-  }
 
-  loop();
+    loop();
+  };
 };
