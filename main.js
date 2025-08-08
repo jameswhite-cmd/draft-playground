@@ -436,21 +436,19 @@ class Game {
 
 // =================== BOOTSTRAP GAME =================== //
 window.onload = () => {
-  yangImg.onload = () => {
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-    canvas.width = CANVAS_WIDTH;
-    canvas.height = CANVAS_HEIGHT;
-    let game = new Game(ctx);
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = CANVAS_WIDTH;
+  canvas.height = CANVAS_HEIGHT;
+  let game = new Game(ctx);
 
-    function loop() {
-      if (game.state === "playing") {
-        game.update();
-      }
-      game.draw();
-      requestAnimationFrame(loop);
+  function loop() {
+    if (game.state === "playing") {
+      game.update();
     }
+    game.draw();
+    requestAnimationFrame(loop);
+  }
 
-    loop();
-  };
+  loop();
 };
