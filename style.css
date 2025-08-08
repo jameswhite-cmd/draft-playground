@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  background: #000;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#gameCanvas {
+  background: #111;
+  margin: 40px 0 0 0;
+  border: 8px solid #39ff14;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 0 32px #39ff1466, 0 0 0 8px #222 inset;
+}
+
+#scoreboard {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 40px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.1rem;
+  color: #39ff14;
+  text-shadow: 0 0 4px #39ff1477;
+  letter-spacing: 2px;
+  background: rgba(0, 0, 0, 0.65);
+  padding: 16px 32px;
+  border-radius: 16px;
+  border: 2px solid #39ff14;
+  z-index: 2;
+  user-select: none;
+}
+
+@media (max-width: 650px) {
+  #gameCanvas {
+    width: 98vw !important;
+    height: 65vw !important;
+    max-width: 100vw;
+    max-height: 70vh;
+  }
+  #scoreboard {
+    font-size: 0.8rem;
+    padding: 10px 10vw;
+  }
+}
