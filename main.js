@@ -92,11 +92,26 @@ class Invader {
     if (!this.alive) return;
     ctx.save();
     const isOdd = (this.row + this.col) % 2 === 1;
+
     const drawGreenInvader = () => {
       ctx.strokeStyle = ENEMY_COLOR;
       ctx.lineWidth = 2;
       ctx.fillStyle = "#39ff14";
-      // Simple pixel invader
+      ctx.beginPath();
+      ctx.rect(this.x+8, this.y+6, 24, 8);
+      ctx.rect(this.x+12, this.y+2, 16, 6);
+      ctx.rect(this.x+4, this.y+14, 32, 8);
+      ctx.rect(this.x, this.y+22, 8, 4);
+      ctx.rect(this.x+32, this.y+22, 8, 4);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    };
+
+    const drawBlueInvader = () => {
+      ctx.strokeStyle = ENEMY_COLOR;
+      ctx.lineWidth = 2;
+      ctx.fillStyle = "#189bff";
       ctx.beginPath();
       ctx.rect(this.x+8, this.y+6, 24, 8);
       ctx.rect(this.x+12, this.y+2, 16, 6);
@@ -112,7 +127,7 @@ class Invader {
       if (yangImg.complete && yangImg.naturalWidth > 0) {
         ctx.drawImage(yangImg, this.x, this.y, this.width, this.height);
       } else {
-        drawGreenInvader();
+        drawBlueInvader();
       }
     } else {
       drawGreenInvader();
