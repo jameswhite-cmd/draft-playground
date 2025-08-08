@@ -91,11 +91,8 @@ class Invader {
   draw(ctx) {
     if (!this.alive) return;
     ctx.save();
-    if ((this.row + this.col) % 2 === 1) {
-      // Draw Yang Li's face image for blue-checker aliens
-      ctx.drawImage(yangImg, this.x, this.y, this.width, this.height);
-    } else {
-      // Draw green pixel-art invader for (row+col)%2===0
+    const isOdd = (this.row + this.col) % 2 === 1;
+    const drawGreenInvader = () => {
       ctx.strokeStyle = ENEMY_COLOR;
       ctx.lineWidth = 2;
       ctx.fillStyle = "#39ff14";
@@ -109,6 +106,16 @@ class Invader {
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
+    };
+
+    if (isOdd) {
+      if (yangImg.complete && yangImg.naturalWidth > 0) {
+        ctx.drawImage(yangImg, this.x, this.y, this.width, this.height);
+      } else {
+        drawGreenInvader();
+      }
+    } else {
+      drawGreenInvader();
     }
     ctx.restore();
   }
