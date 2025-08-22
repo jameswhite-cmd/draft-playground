@@ -35,4 +35,10 @@ Cosine’s approach stands apart by deeply modeling the reasoning process behind
 
 ---
 
+## Fun Fact
+
+- Elephants are the only mammals that can’t jump.
+
+---
+
 For more information about Cosine AI and Genie, visit [cosine.ai](https://cosine.ai/).
